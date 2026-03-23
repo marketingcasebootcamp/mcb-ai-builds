@@ -1,0 +1,38 @@
+name: Competitor Marketing Profiler
+slug: competitor-marketing-profiler
+type: skill
+category: campaign-ops
+platform: claude
+owner: mcb-ai-builds
+summary: Head-to-head competitive marketing analysis — positioning, messaging, channels, and opportunities in one structured report.
+audience:
+  - aspiring-marketer
+  - early-career-marketer
+  - mid-level-marketer
+  - analyst
+inputs:
+  - Your brand name and website URL
+  - Competitor name and website URL
+  - Target audience description (recommended)
+  - Geography or market scope (optional)
+  - Specific focus area to weight more heavily (optional)
+outputs:
+  - Side-by-side positioning snapshot with comparative narrative
+  - Channel footprint table for both brands with activity signals
+  - Audience psychographic analysis for both brands
+  - Head-to-head relational SWOT (your advantages, their advantages, your opportunities, watch points)
+  - Strategic takeaways structured as Pursue / Defend / Watch
+requires_api: false
+api_providers: []
+tags:
+  - competitive-analysis
+  - positioning
+  - channel-strategy
+  - messaging
+  - marketing-research
+  - brand-strategy
+difficulty: beginner
+status: stable
+license: mit
+mcb_featured: true
+version: "1.0"

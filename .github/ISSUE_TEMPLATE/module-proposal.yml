@@ -1,0 +1,79 @@
+name: Module Proposal
+description: Propose a new module for the mcb-ai-builds repo
+title: "[PROPOSAL] module-slug-here"
+labels: ["proposal", "needs-review"]
+body:
+  - type: dropdown
+    id: module-type
+    attributes:
+      label: Module type
+      options:
+        - skill
+        - prompt
+        - app/streamlit
+        - app/web
+        - google-script
+        - template
+    validations:
+      required: true
+
+  - type: input
+    id: module-name
+    attributes:
+      label: Proposed module name
+      placeholder: e.g. "JD to Case Builder"
+    validations:
+      required: true
+
+  - type: input
+    id: module-slug
+    attributes:
+      label: Proposed slug (kebab-case)
+      placeholder: e.g. "jd-to-case-builder"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: inputs-outputs
+    attributes:
+      label: Inputs and outputs
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: api-required
+    attributes:
+      label: Does this require an API key?
+      options:
+        - label: Yes — this module calls an external API
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty
+      options:
+        - beginner
+        - intermediate
+        - advanced
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-distinct
+    attributes:
+      label: Why is this distinct from existing modules?
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Rough example (optional but helpful)
+      description: Sketch of a real input/output pair.
