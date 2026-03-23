@@ -62,7 +62,7 @@ These modules are open and free to use.
 For structured, guided, personalized practice — AI tutoring, custom case generation,
 mock interviews, and integrated workflows:
 
-→ **[MCB.AI](https://mcb.ai)** — AI-powered marketing practice platform
+→ **[MCB.AI](https://marketingcasebootcamp.ai)** — AI-powered marketing practice platform
 
 ---
 
