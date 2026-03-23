@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCB AI Builds — Open marketing tools built with AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f8;
+      --surface: #ffffff;
+      --border: #e5e5e3;
+      --text: #1a1a18;
+      --muted: #6b6b68;
+      --accent: #1a1a18;
+
+      --badge-skill:    #e8f0fe; --badge-skill-text:    #1a56db;
+      --badge-prompt:   #fef3c7; --badge-prompt-text:   #92400e;
+      --badge-app:      #d1fae5; --badge-app-text:      #065f46;
+      --badge-template: #ede9fe; --badge-template-text: #5b21b6;
+      --badge-script:   #fce7f3; --badge-script-text:   #9d174d;
+      --badge-agent:    #fee2e2; --badge-agent-text:    #991b1b;
+
+      --diff-beginner:     #d1fae5; --diff-beginner-text:     #065f46;
+      --diff-intermediate: #fef3c7; --diff-intermediate-text: #92400e;
+      --diff-advanced:     #fee2e2; --diff-advanced-text:     #991b1b;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px 24px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+    header p  { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+    header a  { color: var(--muted); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid var(--border); }
+    header a:hover { color: var(--text); }
+
+    /* ── Controls ── */
+    .controls {
+      max-width: 960px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: var(--surface);
+      outline: none;
+    }
+    .search:focus { border-color: #999; }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .filter-btn:hover   { border-color: #999; color: var(--text); }
+    .filter-btn.active  { background: var(--text); color: #fff; border-color: var(--text); }
+
+    /* ── Grid ── */
+    .grid {
+      max-width: 960px;
+      margin: 24px auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-skill    { background: var(--badge-skill);    color: var(--badge-skill-text); }
+    .badge-prompt   { background: var(--badge-prompt);   color: var(--badge-prompt-text); }
+    .badge-app      { background: var(--badge-app);      color: var(--badge-app-text); }
+    .badge-template { background: var(--badge-template); color: var(--badge-template-text); }
+    .badge-script   { background: var(--badge-script);   color: var(--badge-script-text); }
+    .badge-agent    { background: var(--badge-agent);    color: var(--badge-agent-text); }
+
+    .diff-beginner     { background: var(--diff-beginner);     color: var(--diff-beginner-text); }
+    .diff-intermediate { background: var(--diff-intermediate); color: var(--diff-intermediate-text); }
+    .diff-advanced     { background: var(--diff-advanced);     color: var(--diff-advanced-text); }
+
+    .card-title   { font-size: 0.975rem; font-weight: 600; line-height: 1.3; }
+    .card-summary { font-size: 0.875rem; color: var(--muted); flex: 1; }
+    .card-platform { font-size: 0.78rem; color: var(--muted); }
+
+    .card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: var(--bg); border-color: #999; }
+    .btn-primary { background: var(--text); color: #fff; border-color: var(--text); }
+    .btn-primary:hover { opacity: 0.85; background: var(--text); }
+    .btn.copied { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+
+    /* ── Empty state ── */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.25rem; }
+      .controls { flex-direction: column; }
+      .search { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MCB AI Builds</h1>
+  <p>Open marketing tools, skills, prompts, and templates — built with AI.</p>
+  <br>
+  <a href="https://github.com/marketingcasebootcamp/mcb-ai-builds" target="_blank">View on GitHub &rarr;</a>
+</header>
+
+<div class="controls">
+  <input class="search" type="text" placeholder="Search modules..." id="search" />
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="skill">Skills</button>
+    <button class="filter-btn" data-filter="prompt">Prompts</button>
+    <button class="filter-btn" data-filter="app">Apps</button>
+    <button class="filter-btn" data-filter="template">Templates</button>
+    <button class="filter-btn" data-filter="google-script">Google Scripts</button>
+    <button class="filter-btn" data-filter="agent">Agents</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  MIT License &mdash; free to use, modify, and build on. &nbsp;|&nbsp;
+  <a href="https://mcb.ai" target="_blank">MCB.AI &rarr;</a>
+</footer>
+
+<script>
+  // ─────────────────────────────────────────────
+  // MODULE DATA
+  // To add a new module, copy one object below and
+  // fill in the fields. That's it.
+  // ─────────────────────────────────────────────
+  const REPO = "https://github.com/marketingcasebootcamp/mcb-ai-builds";
+
+  const modules = [
+    {
+      name: "Competitor Marketing Profiler",
+      slug: "competitor-marketing-profiler",
+      type: "skill",
+      category: "campaign-ops",
+      platform: "Claude",
+      summary: "Head-to-head competitive marketing analysis — positioning, messaging, channels, and opportunities in one structured report.",
+      difficulty: "beginner",
+      requires_api: false,
+      featured: true,
+      // action buttons: { label, type: "copy-skill" | "copy-prompt" | "link", value }
+      actions: [
+        {
+          label: "How to install",
+          type: "link",
+          value: REPO + "/tree/main/skills/competitor-marketing-profiler"
+        },
+        {
+          label: "Copy skill",
+          type: "copy-skill",
+          value: REPO + "/raw/main/skills/competitor-marketing-profiler/SKILL.md"
+        }
+      ]
+    }
+    // ADD MORE MODULES HERE
+  ];
+
+  // ─────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────
+  const grid    = document.getElementById("grid");
+  const search  = document.getElementById("search");
+  const filters = document.getElementById("filters");
+
+  let activeFilter = "all";
+  let searchQuery  = "";
+
+  function typeLabel(type) {
+    const map = {
+      skill: "Skill", prompt: "Prompt", app: "App",
+      template: "Template", "google-script": "Google Script", agent: "Agent"
+    };
+    return map[type] || type;
+  }
+
+  function render() {
+    const q = searchQuery.toLowerCase();
+    const filtered = modules.filter(m => {
+      const matchType = activeFilter === "all" || m.type === activeFilter;
+      const matchSearch = !q ||
+        m.name.toLowerCase().includes(q) ||
+        m.summary.toLowerCase().includes(q) ||
+        m.platform.toLowerCase().includes(q) ||
+        m.category.toLowerCase().includes(q);
+      return matchType && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="empty">No modules found.</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(m => `
+      <div class="card" data-type="${m.type}">
+        <div class="card-tags">
+          <span class="badge badge-${m.type}">${typeLabel(m.type)}</span>
+          <span class="badge diff-${m.difficulty}">${m.difficulty}</span>
+          ${m.requires_api ? '<span class="badge" style="background:#f3f4f6;color:#374151">API key needed</span>' : ''}
+        </div>
+        <div class="card-title">${m.name}</div>
+        <div class="card-summary">${m.summary}</div>
+        <div class="card-platform">Platform: ${m.platform}</div>
+        <div class="card-actions">
+          ${m.actions.map(a => actionButton(a)).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function actionButton(a) {
+    if (a.type === "link") {
+      return `<a class="btn" href="${a.value}" target="_blank">${a.label}</a>`;
+    }
+    if (a.type === "copy-skill") {
+      return `<button class="btn btn-primary" onclick="copySkill(this, '${a.value}')">${a.label}</button>`;
+    }
+    if (a.type === "copy-prompt") {
+      return `<button class="btn btn-primary" onclick="copyPrompt(this, '${a.value}')">${a.label}</button>`;
+    }
+    return '';
+  }
+
+  async function copySkill(btn, url) {
+    try {
+      const res = await fetch(url);
+      const text = await res.text();
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+      btn.classList.remove("btn-primary");
+      setTimeout(() => {
+        btn.textContent = "Copy skill";
+        btn.classList.remove("copied");
+        btn.classList.add("btn-primary");
+      }, 2000);
+    } catch {
+      // fallback: open the raw file in new tab
+      window.open(url, "_blank");
+    }
+  }
+
+  async function copyPrompt(btn, url) {
+    try {
+      const res = await fetch(url);
+      const text = await res.text();
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+      btn.classList.remove("btn-primary");
+      setTimeout(() => {
+        btn.textContent = "Copy prompt";
+        btn.classList.remove("copied");
+        btn.classList.add("btn-primary");
+      }, 2000);
+    } catch {
+      window.open(url, "_blank");
+    }
+  }
+
+  // Filter buttons
+  filters.addEventListener("click", e => {
+    if (!e.target.matches(".filter-btn")) return;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    e.target.classList.add("active");
+    activeFilter = e.target.dataset.filter;
+    render();
+  });
+
+  // Search
+  search.addEventListener("input", e => {
+    searchQuery = e.target.value;
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
