@@ -17,6 +17,26 @@ Each module is self-contained with clear inputs, outputs, and usage instructions
 
 ---
 
+## How to use this repo
+
+**Not a developer? Start here.**
+You don't need to write code or set anything up to use most of this repo.
+
+- **Prompts** — copy the prompt, paste it into ChatGPT, Claude, or any AI tool, and run it. That's it.
+- **Templates** — open in Google Sheets, Notion, or your browser. Ready to use.
+- **Web apps** — open the link in your browser. No install.
+- **Skills** — paste the `SKILL.md` contents into a Claude Project's custom instructions. One-time setup, then call the skill by name in any conversation.
+
+**Developer or technically comfortable? You can go further.**
+- **Skills** — copy `SKILL.md` into `.claude/commands/` to use as a Claude Code slash command
+- **Google Scripts** — paste into Google Apps Script and run from your Sheet
+- **Streamlit apps** — run locally with `streamlit run app.py` or deploy to Streamlit Cloud
+- **Agents** — MCP servers and autonomous agents; see individual READMEs for setup requirements
+
+If a module needs an API key, the README will say so and link to the [API Key Setup Guide →](./docs/api-setup.md).
+
+---
+
 ## Module types
 
 | Type | What it is | Technical bar to use |

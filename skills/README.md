@@ -26,8 +26,16 @@ not generic AI responses, but structured tools with consistent output.
 
 ## Install a skill
 
-Each skill folder contains a `SKILL.md` file.
-Follow Anthropic's official Skills documentation to install it in Claude.
+Each skill folder contains a `SKILL.md` file formatted as a direct prompt with YAML frontmatter.
+
+**Claude Code (slash command):**
+```bash
+cp skills/<slug>/SKILL.md .claude/commands/<slug>.md
+```
+Then invoke with `/<slug>` in Claude Code.
+
+**Claude.ai Project:**
+Paste the `SKILL.md` contents into your Project's custom instructions.
 
 ---
 

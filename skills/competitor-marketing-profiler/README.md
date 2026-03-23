@@ -53,14 +53,38 @@ Total length: approximately 1,100–1,200 words. Dense and scannable, not exhaus
 
 ## How to use it
 
-**Requirements:** Web search must be enabled in Claude settings. This skill uses web search actively throughout the process.
+**Requirements:** Web search must be enabled. This skill uses web search actively throughout.
 
-1. Install this skill in Claude (paste the SKILL.md content into a Claude Project instruction or custom system prompt)
-2. Start a new conversation
-3. Provide your brand URL and competitor URL, plus any optional context
-4. The skill researches both brands and delivers the full report
+### Option A — Claude Code (slash command)
 
-**Example prompt:**
+Copy `SKILL.md` into your project or user commands directory:
+
+```bash
+# project-level (only available in this project)
+cp SKILL.md .claude/commands/competitor-marketing-profiler.md
+
+# user-level (available in all projects)
+cp SKILL.md ~/.claude/commands/competitor-marketing-profiler.md
+```
+
+Then invoke it in Claude Code:
+```
+/competitor-marketing-profiler
+
+My brand: Notion — https://notion.so
+We're focused on small teams and freelancers who want an all-in-one workspace.
+
+Competitor: Coda — https://coda.io
+```
+
+### Option B — Claude.ai Project
+
+1. Open or create a Claude Project
+2. Go to **Project instructions**
+3. Paste the full contents of `SKILL.md`
+4. Start a conversation and provide your brand URL and competitor URL
+
+**Example prompt (both options):**
 ```
 My brand: Notion — https://notion.so
 We're focused on small teams and freelancers who want an all-in-one workspace.
@@ -68,7 +92,7 @@ We're focused on small teams and freelancers who want an all-in-one workspace.
 Competitor: Coda — https://coda.io
 ```
 
-That's it. The skill takes it from there.
+That's it. The skill researches both brands and delivers the full report.
 
 ---
 
