@@ -1,0 +1,37 @@
+name: Data Cleaner Agent
+slug: data-cleaner
+type: agent
+category: analytics
+platform: claude
+owner: mcb-ai-builds
+summary: >
+  Cleans messy marketing platform CSV exports into a consistent, analysis-ready schema.
+  Automatically detects metadata rows, footer/total rows, platform type, and column names.
+  Normalizes currencies, percentages, dates, and number formats.
+audience:
+  - analyst
+  - in-house-marketer
+  - agency-marketer
+inputs:
+  - Raw CSV export from Google Ads, Meta, GA4, TikTok, LinkedIn, Microsoft Ads, or Pinterest
+outputs:
+  - Cleaned CSV with standardized column names and normalized data
+  - JSON summary of what was detected and changed
+requires_api: true
+api_providers:
+  - anthropic
+tags:
+  - data-cleaning
+  - csv
+  - reporting
+  - analytics
+  - google-ads
+  - meta-ads
+  - ga4
+  - tiktok
+  - linkedin
+difficulty: intermediate
+status: draft
+license: mit
+mcb_featured: false
+version: "1.0"
